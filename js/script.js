@@ -18,7 +18,7 @@ for (let i = 0; i < buttons.length; i++) {
       if (basket.every(product => product !== newProduct)) {
         basket.push(newProduct);
       }
-    } 
+    }
 
     localStorage.setItem('basket', JSON.stringify(basket));
   };
@@ -29,7 +29,7 @@ const getNewProduct = (index) => {
     case 0:
       return { name: 'Тройной гамбургер', cost: 450, src: 'images/dish-1.png', count: 1 };
     case 1:
-      return { name: 'Нагетсы', cost: 450,  src: 'images/dish-2.png', count: 1 };
+      return { name: 'Нагетсы', cost: 450, src: 'images/dish-2.png', count: 1 };
     case 2:
       return { name: 'Курица на гриле', cost: 450, src: 'images/dish-3.png', count: 1 };
     case 3:
@@ -38,6 +38,24 @@ const getNewProduct = (index) => {
       return { name: 'Шоколадное пироженое', cost: 450, src: 'images/dish-5.png', count: 1 };
     case 5:
       return { name: 'Куриные крылья в панировке', cost: 450, src: 'images/dish-6.png', count: 1 };
+    case 6:
+      return { name: 'пицца охотничья', cost: 450, src: 'images/menu-1.jpg', count: 1 };
+    case 7:
+      return { name: 'Куриные крылья в панировке', cost: 450, src: 'images/menu-2.jpg', count: 1 };
+    case 8:
+      return { name: 'Куриные крылья в панировке', cost: 450, src: 'images/menu-3.jpg', count: 1 };
+    case 9:
+      return { name: 'Куриные крылья в панировке', cost: 450, src: 'images/menu-4.jpg', count: 1 };
+    case 10:
+      return { name: 'Куриные крылья в панировке', cost: 450, src: 'images/menu-5.jpg', count: 1 };
+    case 11:
+      return { name: 'Куриные крылья в панировке', cost: 450, src: 'images/menu-6.jpg', count: 1 };
+    case 12:
+      return { name: 'Куриные крылья в панировке', cost: 450, src: 'images/menu-7.jpg', count: 1 };
+    case 13:
+      return { name: 'Куриные крылья в панировке', cost: 450, src: 'images/menu-8.jpg', count: 1 };
+    case 14:
+      return { name: 'Куриные крылья в панировке', cost: 450, src: 'images/menu-9.jpg', count: 1 };
     default:
       throw new Error('Error in add product');
   };

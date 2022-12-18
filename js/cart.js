@@ -157,13 +157,13 @@ const render = () => {
 
 
   cartStore.forEach((product) => {
-  const cart = document.createElement('div');
+    const cart = document.createElement('div');
 
-  const { cost, name, count, src } = product;
+    const { cost, name, count, src } = product;
 
-  sum += cost*count;
+    sum += cost * count;
 
-  cart.innerHTML = `
+    cart.innerHTML = `
   <div class="card">
     <div class="img-box">
       <img src=${src} alt="Green tomatoes" width="80px" class="product-img">
@@ -181,7 +181,7 @@ const render = () => {
           </button>
         </div>
         <div class="price">
-          $ <span id="price">${cost}</span>
+        ₽ <span id="price">${cost}</span>
         </div>
       </div>
     </div>
@@ -191,11 +191,11 @@ const render = () => {
   </div>
   `;
 
-  productCart.append(cart);
-});
+    productCart.append(cart);
+  });
 
-price.innerText = sum;
-total.innerText = sum;
+  price.innerText = sum;
+  total.innerText = sum;
 };
 
 const increment = (src) => {
@@ -209,10 +209,10 @@ const increment = (src) => {
 const decrement = (src) => {
   const product = cartStore.find(product => product.src === src);
   if (product.count > 1) {
-   product.count -= 1;
+    product.count -= 1;
 
-   localStorage.setItem('basket', JSON.stringify(cartStore));
-   render();
+    localStorage.setItem('basket', JSON.stringify(cartStore));
+    render();
   };
 };
 
@@ -220,10 +220,18 @@ const remove = (src) => {
   cartStore = cartStore.filter(product => product.src !== src);
 
   localStorage.setItem('basket', JSON.stringify(cartStore));
-   render();
+  render();
 };
 
 const createOrder = async () => {
+  const cardholderName = document.getElementById('cardholder-name');
+  const cardNumber = document.getElementById('card-number');
+  const expirationDate = {
+    expireDate1: document.getElementById('expire-date1'),
+    expireDate2: document.getElementById('expire-date2'),
+    cvv: document.getElementById('cvv'),
+  };
+
   const response = await fetch('http://localhost:8080/order', {
     method: 'POST',
     headers: {
@@ -232,12 +240,24 @@ const createOrder = async () => {
     },
     body: JSON.stringify({
       order: cartStore,
+      cardholderName: cardholderName.value,
+      cardNumber: cardNumber.value,
+      expirationDate: {
+        expireDate1: expirationDate.expireDate1.value,
+        expireDate2: expirationDate.expireDate2.value,
+        cvv: expirationDate.cvv.value,
+      },
     }),
   });
   
   if (response.status === 200) {
     cartStore = [];
     localStorage.setItem('basket', JSON.stringify(cartStore));
+    cardholderName.value = '';
+    cardNumber.value = '';
+    expirationDate.expireDate1.value = '';
+    expirationDate.expireDate2.value = '';
+    expirationDate.cvv.value = '';
 
     render();
   }
